@@ -1,0 +1,222 @@
+:root {
+    --primary-color: #ee4d2d;
+    --white-color: #fff;
+    --black-color: #000;
+    --text-color: #333;
+    --border-color: #bdbdbd;
+    --disabled-color: #999;
+    --star-gold-color: #ffd700;
+    --header-height: 120px;
+    --navbar-height: 34px;
+    --header-with-search-height: calc(var(--header-height-) - var(--navbar-height));
+}
+
+/* Apply all CSS */
+* {
+    box-sizing: inherit;
+}
+
+
+/* Giải thích cho vụ 62.5&% 
+Do thông thường ở các trình duyệt web sẽ là 16px,
+nên từ đó ta có thể suy ra rằng khi đặt giá trị là 100%
+ở font-size thì 100% = 16px, và ta luôn được giá trị rem 
+mặc định sẽ bằng 16px, nhưng việc để 100% lại gây ra khó khăn 
+khi điều chỉnh các kích thước về hệ số rem, 
+vd: ta cần một p với giá trị font-size khoảng 12px, như vậy sẽ 
+khó khăn khi tùy chỉnh giá trị giữa rem và px*/
+
+/* Nên ta có giá trị là 62.5%, số nà được lấy từ 100%/16 = 6.25%,
+tức là 1px = 6.25%, và con số 62.5% = 10px, nên từ đây ta có thể dễ dàng
+lấy được số rem mong muốn, vd: 12px = 1.2rem */
+
+/* 12px = rem + x*rem ==> rem = 10px
+<=> 2px = x*rem
+<=> 10*x = 2  
+<=> x = 2/10 ==> x = 0.2px */
+
+/* Từ đó ta suy ra được số rem cần là 1,2, ta có thể làm nhanh = cách
+lấy số px chia cho 10 ta sẽ được số rem với giá trị px tương ứng */
+
+
+/* Về đánh giá thì cách này khá tiện khi sử dụng rem, nhưng có nhược điểm là 
+khi cần phải sử giá trị 16px mặc định cho toàn website thì phải thiết lập cho từng cái,
+Cách này có thể hay hay không và việc sử dụng hợp lý sẽ tùy vào mỗi người đánh giá */
+
+/* sans-serif là lấy font theeo thiết bị design */
+
+
+html {
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+/* Responsive */
+.grid {
+    /* Kích thước tối đa là 1200px */
+    width: 1200px;
+    /* Cái này dành cho thiết bị có màn hình lớn hơn 1200px, hiển thị full màn hình */
+    max-width: 100%;
+    /* Căn giữa khối này khi ở trong khối khác */
+    margin: 0 auto;
+}
+
+.grid_full--width {
+    width: 100%;
+}
+
+/* Những thẻ nằm trong đây đều nằm trên một hàng */
+.grid__row {
+    display: flex;
+    /* Khi các số lượng element vượt kích thước màn hình
+    nó sẽ tự động nhảy xuống dưới */
+    flex-wrap: wrap;
+    /* margin-left: -12px;
+    margin-right: -12px; */
+
+    margin: 0 -5px;
+}
+
+
+.grid__column-2 {
+    padding-left: 5px;
+    padding-right: 5px;
+    /* Số này là  2/12* 100 2 cột chia 12 cột (tổng)*/
+    width: 16.6667%;
+}
+
+/* Tỉ lệ 2.4 ==> 12/5 = 2.4, 12 cột chia cho 5*/
+.grid__column-2-4 {
+    padding-left: 5px;
+    padding-right: 5px;
+    /* Số này là  2/12* 100 2 cột chia 12 cột (tổng)*/
+    width: 20%;
+}
+
+.grid__column-10 {
+    padding-left: 5px;
+    padding-right: 5px;
+    /* Số này là 10/12* 100 ==> 10 cột chia tổng là 12 cột  */
+    width: 83.3334%;
+}
+
+/* Animation hiện dần */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+@keyframes grownth {
+    from {
+        transform: scale(var(--growth-from));
+    } to {
+        transform: scale(var(--grow-to));
+    }
+}
+
+/* Home */
+.select-input {
+    position: relative;
+    padding: 0 12px;
+    background-color: var(--white-color);
+    border-radius: 2px;
+    height: 34px;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.4rem;
+    font-weight: 450;
+    box-shadow: 0 1px 2px #D3D3D3;
+}
+
+.select-input__list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 22px;
+    border-radius: 2px;
+    background-color: var(--white-color);
+    padding: 8px 16px;
+    list-style: none;
+    display: none;
+    box-shadow: 0 1px 2px #D3D3D3;
+    z-index: 1;
+}
+
+.select-input__item {
+    display: flex;
+    flex-direction: column;
+}
+
+.select-input__link {
+    text-decoration: none;
+    color: var(--text-color);
+    display: block;
+    padding: 4px 0;
+}
+
+.select-input__link:hover {
+    color: var(--primary-color);
+}
+
+.select-input__label {
+    font-size: 1.4rem;
+}
+
+.select-input__icon {
+    position: relative;
+    top: 1px;
+    color: rgb(131, 131, 131);
+}
+
+/* Event */
+.select-input:hover .select-input__list {
+    display: block;
+}
+
+/* Pagging */
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    list-style: none;
+}
+
+.pagination-item {
+    margin: 0 10px;
+}
+
+.pagination-item__link {
+    /* Đặt biến local */
+    --height: 30px;
+    font-weight: 300;
+    display: block;
+    text-decoration: none;
+    font-size: 2rem;
+    color: #939393;
+    min-width: 40px;
+    height: var(--height);
+    line-height: var(--height);
+    text-align: center;
+    border-radius: 2px;
+}
+
+.pagination-item__link:hover {
+    opacity: 0.9;
+}
+
+.pagination-item__link--active .pagination-item__link {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+.pagination-item__icon {
+
+}
